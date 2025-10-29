@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVARS Henri Darras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+
+        .fredoka {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 100;
+        }
+
+        /* Page d'accueil */
+        .home-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .home-content {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: white;
+            padding: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .player-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        input[type="text"], select {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Nunito', sans-serif;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #a855f7;
+        }
+
+        select {
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #4ade80, #3b82f6);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #a855f7;
+            border: 2px dashed #d8b4fe;
+            width: 100%;
+        }
+
+        .btn-secondary:hover {
+            background: #faf5ff;
+            border-color: #a855f7;
+        }
+
+        .btn-danger {
+            background: #fecaca;
+            color: #dc2626;
+            border: 2px solid #fca5a5;
+            padding: 12px;
+        }
+
+        .rules-box {
+            background: linear-gradient(to right, #dbeafe, #e9d5ff);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #93c5fd;
+            margin-top: 20px;
+        }
+
+        .rules-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .rules-box ul {
+            list-style: none;
+            color: #1e40af;
+        }
+
+        .rules-box li {
+            margin: 5px 0;
+        }
+
+        /* Page de jeu */
+        .game-page {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .game-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .btn-home {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scores-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: fit-content;
+        }
+
+        .scores-header {
+            background: linear-gradient(to right, #fbbf24, #f97316);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .scores-body {
+            padding: 20px;
+        }
+
+        .player-score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(to right, #dbeafe, #e9d5ff);
+            border-radius: 10px;
+            border: 2px solid #93c5fd;
+            margin-bottom: 10px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .player-points {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #a855f7;
+        }
+
+        .cards-remaining {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cards-remaining-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a855f7;
+            margin-top: 10px;
+        }
+
+        .cards-total {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .job-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .job-card-inner {
+            background: linear-gradient(135deg, #ff9966, #ff5e62, #a855f7);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .job-card-inner:hover {
+            transform: scale(1.02) rotateY(5deg);
+        }
+
+        .job-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .job-name {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .no-card {
+            color: #9ca3af;
+            font-size: 1.2rem;
+        }
+
+        .timer-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-header {
+            background: linear-gradient(to right, #60a5fa, #06b6d4);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .timer-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 20px;
+        }
+
+        .timer-display.warning {
+            color: #ef4444;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            transition: width 1s linear;
+        }
+
+        .scoring-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .scoring-header {
+            background: linear-gradient(to right, #f472b6, #f43f5e);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .scoring-body {
+            padding: 30px;
+        }
+
+        .scoring-player {
+            margin-bottom: 20px;
+        }
+
+        .scoring-player-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .scoring-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-points {
+            flex: 1;
+            background: white;
+            color: #a855f7;
+            border: 2px solid #d8b4fe;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-points:hover {
+            background: #a855f7;
+            color: white;
+            border-color: #a855f7;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 300px;
+        }
+
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .toast.info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .job-name {
+                font-size: 2rem;
+            }
+            .timer-display {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header fredoka">evars henri darras</div>
+
+    <!-- Page d'accueil -->
+    <div id="homePage" class="home-page">
+        <div class="home-content">
+            <h1 class="title fredoka">EVARS Atelier 1</h1>
+            <p class="subtitle">Tire une carte, défends ton droit d'exercer ce métier contre les clichés !</p>
+
+            <div class="card">
+                <div class="card-header fredoka">Configuration de la partie</div>
+                <div class="card-body">
+                    <!-- Nombre de cartes -->
+                    <div class="input-group">
+                        <label class="input-label fredoka">Nombre de cartes</label>
+                        <select id="cardsCount" class="fredoka">
+                            <option value="10">10 cartes (partie rapide)</option>
+                            <option value="20">20 cartes</option>
+                            <option value="30">30 cartes</option>
+                            <option value="50">50 cartes</option>
+                            <option value="100">100 cartes</option>
+                            <option value="205" selected>205 cartes (toutes)</option>
+                        </select>
+                    </div>
+
+                    <!-- Joueurs -->
+                    <div class="input-group">
+                        <label class="input-label fredoka">Joueurs (<span id="playerCount">2</span>)</label>
+                        <div id="playersContainer"></div>
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="addPlayer()">+ Ajouter un joueur</button>
+                    <button class="btn btn-primary" onclick="startGame()">▶ Lancer la partie</button>
+
+                    <div class="rules-box">
+                        <h3 class="fredoka">Règles du jeu</h3>
+                        <ul>
+                            <li>• Chaque joueur tire une carte métier</li>
+                            <li>• Défendez votre métier face aux clichés</li>
+                            <li>• Vous avez 30 secondes pour argumenter</li>
+                            <li>• Les autres joueurs votent et attribuent les points</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page de jeu -->
+    <div id="gamePage" class="game-page hidden">
+        <div class="game-header">
+            <h1 class="game-title fredoka">EVARS Atelier 1</h1>
+            <button class="btn btn-home" onclick="goHome()">🏠 Accueil</button>
+        </div>
+
+        <div class="container">
+            <div class="game-grid">
+                <!-- Colonne gauche - Scores -->
+                <div>
+                    <div class="scores-card">
+                        <div class="scores-header fredoka">🏆 Scores</div>
+                        <div class="scores-body" id="scoresContainer"></div>
+                    </div>
+
+                    <div class="cards-remaining">
+                        <div style="color: #a855f7; font-size: 2rem;">👥</div>
+                        <p style="color: #6b7280; margin: 10px 0;">Cartes restantes</p>
+                        <div class="cards-remaining-number fredoka" id="cardsRemaining">205</div>
+                        <div class="cards-total" id="cardsTotal">sur 205</div>
+                    </div>
+                </div>
+
+                <!-- Colonne droite - Carte et Timer -->
+                <div>
+                    <div class="job-card">
+                        <div id="jobCardContent">
+                            <p class="no-card">Aucune carte tirée</p>
+                            <button class="btn btn-primary" style="margin-top: 20px;" onclick="drawCard()">Tirer une carte</button>
+                        </div>
+                    </div>
+
+                    <div id="timerCard" class="timer-card hidden">
+                        <div class="timer-header fredoka">⏱️ Chronomètre</div>
+                        <div class="timer-body">
+                            <div class="timer-display fredoka" id="timerDisplay">30s</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 100%;"></div>
+                            </div>
+                            <button id="startTimerBtn" class="btn btn-primary" onclick="startTimer()">▶ Démarrer le chrono</button>
+                            <button id="showScoringBtn" class="btn btn-primary hidden" onclick="showScoring()">Attribuer les points</button>
+                        </div>
+                    </div>
+
+                    <div id="scoringCard" class="scoring-card hidden">
+                        <div class="scoring-header fredoka">Attribution des points</div>
+                        <div class="scoring-body" id="scoringContainer"></div>
+                    </div>
+
+                    <button id="nextCardBtn" class="btn btn-primary hidden" style="margin-top: 20px; width: 100%; background: linear-gradient(to right, #818cf8, #a855f7);" onclick="drawCard()">Tirer une nouvelle carte</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer fredoka">evars henri darras</div>
+    </div>
+
+    <script>
+        // Liste de 205 métiers
+        const JOBS_LIST = [
+            "Électricien", "Chaudronnier", "Électronicien",
+            "Médecin", "Infirmier", "Sage-femme", "Kinésithérapeute", "Pharmacien",
+            "Professeur", "Instituteur", "Éducateur", "Directeur d'école", "Conseiller pédagogique",
+            "Ingénieur civil", "Architecte", "Maçon", "Plombier", "Menuisier",
+            "Soudeur", "Mécanicien auto", "Carrossier", "Peintre en bâtiment", "Couvreur",
+            "Pompier", "Policier", "Gendarme", "Agent de sécurité", "Militaire",
+            "Avocat", "Juge", "Notaire", "Greffier", "Huissier de justice",
+            "Chef cuisinier", "Pâtissier", "Boulanger", "Serveur", "Barman",
+            "Coiffeur", "Esthéticien", "Manucure", "Maquilleur", "Tatoueur",
+            "Développeur web", "Data scientist", "Cybersécurité", "Designer UX/UI", "Chef de projet IT",
+            "Journaliste", "Photographe", "Vidéaste", "Réalisateur", "Monteur vidéo",
+            "Acteur", "Danseur", "Chanteur", "Musicien", "Chorégraphe",
+            "Agriculteur", "Éleveur", "Vétérinaire", "Maraîcher", "Viticulteur",
+            "Bûcheron", "Jardinier", "Paysagiste", "Fleuriste", "Horticulteur",
+            "Pilote d'avion", "Hôtesse de l'air", "Contrôleur aérien", "Mécanicien aéronautique",
+            "Chauffeur de bus", "Chauffeur de taxi", "Conducteur de train", "Chauffeur de camion",
+            "Marin", "Capitaine de bateau", "Pêcheur", "Plongeur professionnel",
+            "Banquier", "Comptable", "Gestionnaire de patrimoine", "Auditeur", "Trader",
+            "Directeur commercial", "Vendeur", "Agent immobilier", "Téléconseiller",
+            "Psychologue", "Psychiatre", "Psychanalyste", "Coach de vie", "Sophrologue",
+            "Assistant social", "Éducateur spécialisé", "Animateur socioculturel",
+            "Bibliothécaire", "Archiviste", "Documentaliste", "Conservateur de musée",
+            "Sportif professionnel", "Entraîneur sportif", "Arbitre", "Préparateur physique",
+            "Scientifique", "Chercheur", "Physicien", "Chimiste", "Biologiste",
+            "Astronome", "Géologue", "Océanographe", "Météorologue",
+            "Entrepreneur", "PDG", "Directeur général", "Manager", "Chef d'équipe",
+            "Graphiste", "Illustrateur", "Sculpteur", "Peintre artiste", "Céramiste",
+            "Écrivain", "Poète", "Scénariste", "Traducteur", "Correcteur",
+            "Déménageur", "Livreur", "Coursier", "Magasinier", "Logisticien",
+            "Opticien", "Audioprothésiste", "Prothésiste dentaire", "Orthodontiste",
+            "Préparateur en pharmacie", "Laborantin", "Radiologue", "Anesthésiste",
+            "Ambulancier", "Aide-soignant", "Auxiliaire de vie", "Assistant dentaire",
+            "Commissaire-priseur", "Antiquaire", "Galeriste", "Marchand d'art",
+            "Syndicaliste", "Politique", "Diplomate", "Attaché de presse",
+            "Steward", "Agent d'accueil", "Réceptionniste", "Concierge",
+            "DJ", "Producteur musical", "Ingénieur du son", "Régisseur",
+            "Styliste", "Modéliste", "Couturier", "Designer de mode",
+            "Webmaster", "Community manager", "Influenceur", "YouTubeur",
+            "Bijoutier", "Horloger", "Orfèvre", "Joaillier",
+            "Cordonnier", "Tapissier", "Ébéniste", "Relieur",
+            "Sommelier", "Œnologue", "Brasseur", "Distillateur",
+            "Maître-nageur", "Moniteur de ski", "Guide de montagne", "Moniteur d'équitation",
+            "Animalier", "Dresseur", "Toiletteur", "Éducateur canin",
+            "Thanatopracteur", "Crématorium", "Fossoyeur",
+            "Démineur", "Artificier", "Agent de douane", "Garde forestier",
+            "Sage", "Philosophe", "Théologien", "Pasteur",
+            "Youtuber gaming", "Streamer", "Pro gamer", "Game designer"
+        ];
+
+        // État du jeu
+        let gameState = {
+            players: [],
+            availableJobs: [],
+            totalCards: 205,
+            currentJob: null,
+            timeLeft: 30,
+            timerInterval: null,
+            timerRunning: false
+        };
+
+        // Initialisation
+        function init() {
+            renderPlayerInputs();
+        }
+
+        // Afficher les inputs de joueurs
+        function renderPlayerInputs() {
+            const container = document.getElementById('playersContainer');
+            const count = gameState.players.length || 2;
+            
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const row = document.createElement('div');
+                row.className = 'player-input-row';
+                row.innerHTML = `
+                    <input type="text" placeholder="Nom du joueur ${i + 1}" id="player${i}" value="${gameState.players[i]?.name || ''}">
+                    ${count > 2 ? `<button class="btn btn-danger" onclick="removePlayer(${i})">−</button>` : ''}
+                `;
+                container.appendChild(row);
+            }
+            
+            document.getElementById('playerCount').textContent = count;
+        }
+
+        // Ajouter un joueur
+        function addPlayer() {
+            const count = document.querySelectorAll('#playersContainer input').length;
+            if (count >= 8) {
+                showToast('Maximum 8 joueurs', 'error');
+                return;
+            }
+            gameState.players.push({ name: '', score: 0 });
+            renderPlayerInputs();
+        }
+
+        // Supprimer un joueur
+        function removePlayer(index) {
+            const count = document.querySelectorAll('#playersContainer input').length;
+            if (count <= 2) {
+                showToast('Il faut au moins 2 joueurs', 'error');
+                return;
+            }
+            gameState.players.splice(index, 1);
+            renderPlayerInputs();
+        }
+
+        // Démarrer le jeu
+        function startGame() {
+            const inputs = document.querySelectorAll('#playersContainer input');
+            const players = [];
+            
+            inputs.forEach(input => {
+                if (input.value.trim()) {
+                    players.push({
+                        name: input.value.trim(),
+                        score: 0
+                    });
+                }
+            });
+
+            if (players.length < 2) {
+                showToast('Veuillez entrer au moins 2 noms de joueurs', 'error');
+                return;
+            }
+
+            // Récupérer le nombre de cartes sélectionné
+            const selectedCardsCount = parseInt(document.getElementById('cardsCount').value);
+            
+            // Mélanger et sélectionner le nombre de cartes demandé
+            const shuffledJobs = [...JOBS_LIST].sort(() => Math.random() - 0.5);
+            const selectedJobs = shuffledJobs.slice(0, selectedCardsCount);
+
+            gameState.players = players;
+            gameState.availableJobs = selectedJobs;
+            gameState.totalCards = selectedCardsCount;
+            gameState.currentJob = null;
+
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('gamePage').classList.remove('hidden');
+
+            updateScores();
+            updateCardsRemaining();
+            showToast(`Partie créée avec ${selectedCardsCount} cartes !`, 'success');
+        }
+
+        // Retour à l'accueil
+        function goHome() {
+            if (confirm('Voulez-vous vraiment quitter la partie en cours ?')) {
+                document.getElementById('gamePage').classList.add('hidden');
+                document.getElementById('homePage').classList.remove('hidden');
+                resetGame();
+            }
+        }
+
+        // Réinitialiser le jeu
+        function resetGame() {
+            gameState = {
+                players: [],
+                availableJobs: [],
+                totalCards: 205,
+                currentJob: null,
+                timeLeft: 30,
+                timerInterval: null,
+                timerRunning: false
+            };
+            clearInterval(gameState.timerInterval);
+        }
+
+        // Tirer une carte
+        function drawCard() {
+            if (gameState.availableJobs.length === 0) {
+                showToast('Plus de cartes disponibles !', 'error');
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * gameState.availableJobs.length);
+            const job = gameState.availableJobs[randomIndex];
+            gameState.availableJobs.splice(randomIndex, 1);
+            gameState.currentJob = job;
+            gameState.timeLeft = 30;
+            gameState.timerRunning = false;
+
+            // Afficher la carte
+            document.getElementById('jobCardContent').innerHTML = `
+                <div class="job-card-inner">
+                    <p class="job-label fredoka">TON MÉTIER</p>
+                    <h2 class="job-name fredoka">${job}</h2>
+                </div>
+            `;
+
+            // Afficher le timer
+            document.getElementById('timerCard').classList.remove('hidden');
+            document.getElementById('startTimerBtn').classList.remove('hidden');
+            document.getElementById('showScoringBtn').classList.add('hidden');
+            document.getElementById('scoringCard').classList.add('hidden');
+            document.getElementById('nextCardBtn').classList.add('hidden');
+
+            updateTimerDisplay();
+            updateCardsRemaining();
+            showToast(`Carte tirée : ${job}`, 'success');
+        }
+
+        // Démarrer le timer
+        function startTimer() {
+            if (!gameState.currentJob) {
+                showToast("Tirez d'abord une carte !", 'error');
+                return;
+            }
+
+            gameState.timerRunning = true;
+            document.getElementById('startTimerBtn').classList.add('hidden');
+            document.getElementById('nextCardBtn').classList.add('hidden');
+
+            gameState.timerInterval = setInterval(() => {
+                gameState.timeLeft--;
+                updateTimerDisplay();
+
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    gameState.timerRunning = false;
+                    document.getElementById('showScoringBtn').classList.remove('hidden');
+                    showToast('Temps écoulé ! Attribuez les points.', 'info');
+                }
+            }, 1000);
+        }
+
+        // Mettre à jour l'affichage du timer
+        function updateTimerDisplay() {
+            const display = document.getElementById('timerDisplay');
+            display.textContent = `${gameState.timeLeft}s`;
+            
+            if (gameState.timeLeft <= 10) {
+                display.classList.add('warning');
+            } else {
+                display.classList.remove('warning');
+            }
+
+            const percentage = (gameState.timeLeft / 30) * 100;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+        }
+
+        // Afficher le panneau de scoring
+        function showScoring() {
+            const container = document.getElementById('scoringContainer');
+            container.innerHTML = '';
+
+            gameState.players.forEach(player => {
+                const div = document.createElement('div');
+                div.className = 'scoring-player';
+                div.innerHTML = `
+                    <p class="scoring-player-name">${player.name}</p>
+                    <div class="scoring-buttons">
+                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 1)">+1</button>
+                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 2)">+2</button>
+                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 3)">+3</button>
+                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 5)">+5</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('scoringCard').classList.remove('hidden');
+            document.getElementById('showScoringBtn').classList.add('hidden');
+        }
+
+        // Attribuer des points
+        function awardPoints(playerName, points) {
+            const player = gameState.players.find(p => p.name === playerName);
+            if (player) {
+                player.score += points;
+                updateScores();
+                showToast(`${points} point(s) attribué(s) à ${playerName}`, 'success');
+                
+                // Réinitialiser pour la prochaine carte
+                document.getElementById('scoringCard').classList.add('hidden');
+                document.getElementById('nextCardBtn').classList.remove('hidden');
+                gameState.currentJob = null;
+                
+                document.getElementById('jobCardContent').innerHTML = `
+                    <p class="no-card">Aucune carte tirée</p>
+                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="drawCard()">Tirer une carte</button>
+                `;
+                document.getElementById('timerCard').classList.add('hidden');
+            }
+        }
+
+        // Mettre à jour les scores
+        function updateScores() {
+            const container = document.getElementById('scoresContainer');
+            container.innerHTML = '';
+
+            gameState.players.forEach(player => {
+                const div = document.createElement('div');
+                div.className = 'player-score';
+                div.innerHTML = `
+                    <span class="player-name">${player.name}</span>
+                    <span class="player-points fredoka">${player.score}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Mettre à jour le nombre de cartes restantes
+        function updateCardsRemaining() {
+            document.getElementById('cardsRemaining').textContent = gameState.availableJobs.length;
+            document.getElementById('cardsTotal').textContent = `sur ${gameState.totalCards}`;
+        }
+
+        // Afficher un toast
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Initialiser au chargement
+        init();
+    </script>
+</body>
+</html>
+
