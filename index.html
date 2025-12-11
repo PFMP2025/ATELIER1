@@ -3,996 +3,886 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVARS Henri Darras</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Jeu EVARS - Respect & Estime de Soi</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Nunito', sans-serif;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(180deg, #f9f5f0 0%, #e8f4f2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            color: #2d2520;
         }
-
-        .fredoka {
-            font-family: 'Fredoka', sans-serif;
-        }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        .hidden {
-            display: none !important;
-        }
-
+        
         /* Header */
-        .header {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.2);
+        header {
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 0;
             z-index: 100;
         }
-
-        /* Page d'accueil */
-        .home-page {
-            min-height: 100vh;
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f87171 0%, #fbbf24 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(248, 113, 113, 0.3);
         }
-
-        .home-content {
-            max-width: 600px;
-            width: 100%;
+        
+        .logo-text h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            background: linear-gradient(135deg, #f87171, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        .title {
+        
+        .logo-text p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .badge {
+            background: rgba(251, 191, 36, 0.2);
+            color: #d97706;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Welcome Screen */
+        .welcome-screen {
             text-align: center;
-            color: white;
-            font-size: 3.5rem;
-            font-weight: bold;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .heart-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(248, 113, 113, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(248, 113, 113, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(248, 113, 113, 0.5); }
+        }
+        
+        .welcome-screen h2 {
+            font-size: 48px;
+            font-weight: 800;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            color: #2d2520;
         }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
+        
+        .welcome-screen p {
+            font-size: 18px;
+            color: #64748b;
+            line-height: 1.8;
             margin-bottom: 40px;
         }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        
+        /* Player Selection */
+        .player-selection {
+            max-width: 500px;
+            margin: 0 auto 40px;
         }
-
-        .card-header {
-            background: linear-gradient(to right, #ff9966, #ff5e62);
-            color: white;
-            padding: 20px;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+        
+        .player-selection label {
             display: block;
-            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d2520;
         }
-
-        .player-input-row {
+        
+        .player-buttons {
             display: flex;
             gap: 10px;
-            margin-bottom: 10px;
-            animation: slideIn 0.5s ease-out;
+            margin-bottom: 30px;
         }
-
-        input[type="text"], select {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Nunito', sans-serif;
-            transition: border-color 0.3s;
-            background: white;
-        }
-
-        input[type="text"]:focus, select:focus {
-            outline: none;
-            border-color: #a855f7;
-        }
-
-        select {
-            cursor: pointer;
-            width: 100%;
-        }
-
+        
         .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            flex: 1;
+            padding: 14px 24px;
+            font-size: 16px;
             font-weight: 600;
+            border: 2px solid #f87171;
+            background: white;
+            color: #f87171;
+            border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.3s;
-            font-family: 'Fredoka', sans-serif;
+            transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
         }
-
+        
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(248, 113, 113, 0.3);
         }
-
-        .btn:active {
-            transform: translateY(0);
+        
+        .btn.active, .btn-primary {
+            background: #f87171;
+            color: white;
         }
-
+        
         .btn-primary {
-            background: linear-gradient(to right, #4ade80, #3b82f6);
-            color: white;
             width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
-            margin-top: 10px;
+            padding: 18px;
+            font-size: 18px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(248, 113, 113, 0.3);
         }
-
+        
+        .btn-primary:hover {
+            background: #ef4444;
+            box-shadow: 0 6px 30px rgba(248, 113, 113, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
         .btn-secondary {
+            background: #5eead4;
+            color: white;
+            border: 2px solid #5eead4;
+        }
+        
+        .btn-outline {
             background: white;
-            color: #a855f7;
-            border: 2px dashed #d8b4fe;
-            width: 100%;
+            color: #2d2520;
+            border: 2px solid #cbd5e1;
         }
-
-        .btn-secondary:hover {
-            background: #faf5ff;
-            border-color: #a855f7;
-        }
-
-        .btn-danger {
-            background: #fecaca;
-            color: #dc2626;
-            border: 2px solid #fca5a5;
-            padding: 12px;
-        }
-
-        .rules-box {
-            background: linear-gradient(to right, #dbeafe, #e9d5ff);
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #93c5fd;
-            margin-top: 20px;
-        }
-
-        .rules-box h3 {
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-
-        .rules-box ul {
-            list-style: none;
-            color: #1e40af;
-        }
-
-        .rules-box li {
-            margin: 5px 0;
-        }
-
-        /* Page de jeu */
-        .game-page {
-            padding-top: 80px;
-            min-height: 100vh;
-        }
-
-        .game-header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .game-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .btn-home {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-home:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .game-grid {
+        
+        /* Categories */
+        .categories {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
         }
-
-        @media (max-width: 1024px) {
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .scores-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            height: fit-content;
-        }
-
-        .scores-header {
-            background: linear-gradient(to right, #fbbf24, #f97316);
-            color: white;
-            padding: 15px 20px;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .scores-body {
-            padding: 20px;
-        }
-
-        .player-score {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: linear-gradient(to right, #dbeafe, #e9d5ff);
-            border-radius: 10px;
-            border: 2px solid #93c5fd;
-            margin-bottom: 10px;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .player-name {
+        
+        .category-badge {
+            background: rgba(94, 234, 212, 0.2);
+            color: #0f766e;
+            padding: 12px 20px;
+            border-radius: 12px;
             font-weight: 600;
-            color: #1f2937;
-        }
-
-        .player-points {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #a855f7;
-        }
-
-        .cards-remaining {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
+            font-size: 14px;
             text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-
-        .cards-remaining-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #a855f7;
-            margin-top: 10px;
+        
+        /* Stats Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
-
-        .cards-total {
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin-top: 5px;
+        
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 2px solid #f1f5f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s;
         }
-
-        .job-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            min-height: 300px;
+        
+        .stat-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
         }
-
-        .job-card-inner {
-            background: linear-gradient(135deg, #ff9966, #ff5e62, #a855f7);
-            border-radius: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            transition: transform 0.3s;
+        
+        .stat-icon.players { background: rgba(94, 234, 212, 0.2); }
+        .stat-icon.cards { background: rgba(251, 191, 36, 0.2); }
+        .stat-icon.progress { background: rgba(248, 113, 113, 0.2); }
+        
+        .stat-content h3 {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 5px;
         }
-
-        .job-card-inner:hover {
-            transform: scale(1.02) rotateY(5deg);
+        
+        .stat-content .number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #2d2520;
         }
-
-        .job-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .job-name {
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-
-        .no-card {
-            color: #9ca3af;
-            font-size: 1.2rem;
-        }
-
-        .timer-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .timer-header {
-            background: linear-gradient(to right, #60a5fa, #06b6d4);
-            color: white;
-            padding: 15px 20px;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .timer-body {
-            padding: 30px;
-            text-align: center;
-        }
-
-        .timer-display {
-            font-size: 5rem;
-            font-weight: bold;
-            color: #3b82f6;
-            margin-bottom: 20px;
-        }
-
-        .timer-display.warning {
-            color: #ef4444;
-            animation: pulse 1s ease-in-out infinite;
-        }
-
+        
         .progress-bar {
             width: 100%;
-            height: 12px;
-            background: #e5e7eb;
+            height: 8px;
+            background: #f1f5f9;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
-
+        
         .progress-fill {
             height: 100%;
-            background: #3b82f6;
-            transition: width 1s linear;
+            background: #f87171;
+            transition: width 0.5s ease;
         }
-
-        .scoring-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+        
+        /* Card */
+        .card-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .card-wrapper {
+            perspective: 1000px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            transition: transform 0.7s;
+            transform-style: preserve-3d;
+        }
+        
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #f87171, #5eead4, #fbbf24);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
             overflow: hidden;
-            margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: bounceIn 0.6s ease-out;
+            position: relative;
         }
-
-        .scoring-header {
-            background: linear-gradient(to right, #f472b6, #f43f5e);
+        
+        .card-front::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: white;
+            opacity: 0.1;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .card-front-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-front h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 48px;
             color: white;
-            padding: 15px 20px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            position: relative;
+            z-index: 1;
         }
-
-        .scoring-body {
-            padding: 30px;
+        
+        .card-front p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
         }
-
-        .scoring-player {
+        
+        .card-back {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #f1f5f9;
+        }
+        
+        .card-category {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 2px solid;
+        }
+        
+        .card-category.digital { background: rgba(59, 130, 246, 0.1); color: #1d4ed8; border-color: #bfdbfe; }
+        .card-category.boundaries { background: rgba(168, 85, 247, 0.1); color: #7e22ce; border-color: #e9d5ff; }
+        .card-category.peer_pressure { background: rgba(249, 115, 22, 0.1); color: #c2410c; border-color: #fed7aa; }
+        .card-category.respect { background: rgba(34, 197, 94, 0.1); color: #15803d; border-color: #bbf7d0; }
+        .card-category.bullying { background: rgba(239, 68, 68, 0.1); color: #b91c1c; border-color: #fecaca; }
+        .card-category.self_worth { background: rgba(236, 72, 153, 0.1); color: #be185d; border-color: #fbcfe8; }
+        
+        .card-situation {
+            flex: 1;
+        }
+        
+        .card-situation h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .card-situation-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #2d2520;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .card-questions {
+            background: rgba(241, 245, 249, 0.5);
+            padding: 24px;
+            border-radius: 12px;
             margin-bottom: 20px;
         }
-
-        .scoring-player-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+        
+        .card-questions h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2d2520;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
-
-        .scoring-buttons {
+        
+        .question-item {
             display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .question-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question-number {
+            width: 28px;
+            height: 28px;
+            background: #f87171;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .question-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #2d2520;
+            padding-top: 3px;
+        }
+        
+        .flip-button {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+        
+        .flip-button:hover {
+            color: #2d2520;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .action-buttons .btn {
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
         }
-
-        .btn-points {
-            flex: 1;
+        
+        /* History */
+        .history {
+            margin-top: 60px;
+        }
+        
+        .history h3 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #2d2520;
+        }
+        
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .history-card {
+            aspect-ratio: 3/4;
             background: white;
-            color: #a855f7;
-            border: 2px solid #d8b4fe;
-            font-weight: bold;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
         }
-
-        .btn-points:hover {
-            background: #a855f7;
-            color: white;
-            border-color: #a855f7;
+        
+        .history-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
-
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 8px 15px;
-            border-radius: 20px;
+        
+        .history-card .card-category {
+            font-size: 10px;
+            padding: 4px 8px;
+            margin-bottom: 10px;
         }
-
-        /* Toast notifications */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            animation: slideInRight 0.3s ease-out;
-            max-width: 300px;
+        
+        .history-card p {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
-
-        .toast.success {
-            border-left: 4px solid #10b981;
+        
+        .hidden {
+            display: none;
         }
-
-        .toast.error {
-            border-left: 4px solid #ef4444;
-        }
-
-        .toast.info {
-            border-left: 4px solid #3b82f6;
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .title {
-                font-size: 2.5rem;
+            .welcome-screen h2 {
+                font-size: 32px;
             }
-            .job-name {
-                font-size: 2rem;
+            
+            .card-back {
+                padding: 24px;
             }
-            .timer-display {
-                font-size: 4rem;
+            
+            .card-situation-text {
+                font-size: 16px;
+            }
+            
+            .action-buttons .btn {
+                min-width: 150px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <div class="header fredoka">evars henri darras</div>
-
-    <!-- Page d'accueil -->
-    <div id="homePage" class="home-page">
-        <div class="home-content">
-            <h1 class="title fredoka">EVARS Atelier 1</h1>
-            <p class="subtitle">Tire une carte, défends ton droit d'exercer ce métier contre les clichés !</p>
-
-            <div class="card">
-                <div class="card-header fredoka">Configuration de la partie</div>
-                <div class="card-body">
-                    <!-- Nombre de cartes -->
-                    <div class="input-group">
-                        <label class="input-label fredoka">Nombre de cartes</label>
-                        <select id="cardsCount" class="fredoka">
-                            <option value="10">10 cartes (partie rapide)</option>
-                            <option value="20">20 cartes</option>
-                            <option value="30">30 cartes</option>
-                            <option value="50">50 cartes</option>
-                            <option value="100">100 cartes</option>
-                            <option value="205" selected>205 cartes (toutes)</option>
-                        </select>
-                    </div>
-
-                    <!-- Joueurs -->
-                    <div class="input-group">
-                        <label class="input-label fredoka">Joueurs (<span id="playerCount">2</span>)</label>
-                        <div id="playersContainer"></div>
-                    </div>
-
-                    <button class="btn btn-secondary" onclick="addPlayer()">+ Ajouter un joueur</button>
-                    <button class="btn btn-primary" onclick="startGame()">▶ Lancer la partie</button>
-
-                    <div class="rules-box">
-                        <h3 class="fredoka">Règles du jeu</h3>
-                        <ul>
-                            <li>• Chaque joueur tire une carte métier</li>
-                            <li>• Défendez votre métier face aux clichés</li>
-                            <li>• Vous avez 30 secondes pour argumenter</li>
-                            <li>• Les autres joueurs votent et attribuent les points</li>
-                        </ul>
-                    </div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">❤️</div>
+                <div class="logo-text">
+                    <h1>Jeu EVARS</h1>
+                    <p>Respect & Estime de Soi</p>
                 </div>
             </div>
+            <div class="badge">✨ Formation EVARS</div>
         </div>
-    </div>
+    </header>
 
-    <!-- Page de jeu -->
-    <div id="gamePage" class="game-page hidden">
-        <div class="game-header">
-            <h1 class="game-title fredoka">EVARS Atelier 1</h1>
-            <button class="btn btn-home" onclick="goHome()">🏠 Accueil</button>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="welcome-screen">
+            <div class="heart-icon">❤️</div>
+            <h2>Bienvenue au Jeu EVARS</h2>
+            <p>Un jeu éducatif pour réfléchir ensemble sur le respect et l'estime de soi. Chaque carte présente une situation qui invite à la discussion et à la réflexion en groupe.</p>
+            
+            <div class="player-selection">
+                <label>👥 Nombre de joueurs par groupe</label>
+                <div class="player-buttons">
+                    <button class="btn" onclick="selectPlayers(3)">3 joueurs</button>
+                    <button class="btn active" onclick="selectPlayers(4)">4 joueurs</button>
+                    <button class="btn" onclick="selectPlayers(5)">5 joueurs</button>
+                </div>
+                <button class="btn btn-primary" onclick="startGame()">Commencer le jeu</button>
+            </div>
+            
+            <div class="categories">
+                <div class="category-badge">Sécurité Numérique</div>
+                <div class="category-badge">Limites Personnelles</div>
+                <div class="category-badge">Pression des Pairs</div>
+                <div class="category-badge">Respect d'Autrui</div>
+                <div class="category-badge">Harcèlement</div>
+                <div class="category-badge">Estime de Soi</div>
+            </div>
         </div>
 
-        <div class="container">
-            <div class="game-grid">
-                <!-- Colonne gauche - Scores -->
-                <div>
-                    <div class="scores-card">
-                        <div class="scores-header fredoka">🏆 Scores</div>
-                        <div class="scores-body" id="scoresContainer"></div>
-                    </div>
-
-                    <div class="cards-remaining">
-                        <div style="color: #a855f7; font-size: 2rem;">👥</div>
-                        <p style="color: #6b7280; margin: 10px 0;">Cartes restantes</p>
-                        <div class="cards-remaining-number fredoka" id="cardsRemaining">205</div>
-                        <div class="cards-total" id="cardsTotal">sur 205</div>
+        <!-- Game Screen -->
+        <div id="gameScreen" class="hidden">
+            <!-- Stats Panel -->
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-icon players">👥</div>
+                    <div class="stat-content">
+                        <h3>Joueurs</h3>
+                        <div class="number" id="playersCount">4</div>
                     </div>
                 </div>
-
-                <!-- Colonne droite - Carte et Timer -->
-                <div>
-                    <div class="job-card">
-                        <div id="jobCardContent">
-                            <p class="no-card">Aucune carte tirée</p>
-                            <button class="btn btn-primary" style="margin-top: 20px;" onclick="drawCard()">Tirer une carte</button>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-icon cards">📚</div>
+                    <div class="stat-content">
+                        <h3>Cartes restantes</h3>
+                        <div class="number" id="cardsRemaining">50</div>
                     </div>
-
-                    <div id="timerCard" class="timer-card hidden">
-                        <div class="timer-header fredoka">⏱️ Chronomètre</div>
-                        <div class="timer-body">
-                            <div class="timer-display fredoka" id="timerDisplay">30s</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progressFill" style="width: 100%;"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon progress">✓</div>
+                    <div class="stat-content">
+                        <h3>Progression</h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="number" id="cardsDrawn">0</div>
+                            <div style="flex: 1;">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                                </div>
                             </div>
-                            <button id="startTimerBtn" class="btn btn-primary" onclick="startTimer()">▶ Démarrer le chrono</button>
-                            <button id="showScoringBtn" class="btn btn-primary hidden" onclick="showScoring()">Attribuer les points</button>
                         </div>
                     </div>
-
-                    <div id="scoringCard" class="scoring-card hidden">
-                        <div class="scoring-header fredoka">Attribution des points</div>
-                        <div class="scoring-body" id="scoringContainer"></div>
-                    </div>
-
-                    <button id="nextCardBtn" class="btn btn-primary hidden" style="margin-top: 20px; width: 100%; background: linear-gradient(to right, #818cf8, #a855f7);" onclick="drawCard()">Tirer une nouvelle carte</button>
                 </div>
             </div>
-        </div>
 
-        <div class="footer fredoka">evars henri darras</div>
+            <!-- Card Area -->
+            <div class="card-container">
+                <div class="card-wrapper">
+                    <div class="card" id="card">
+                        <!-- Front -->
+                        <div class="card-face card-front">
+                            <div class="card-front-icon">💬</div>
+                            <h2>EVARS</h2>
+                            <p>Carte Situation</p>
+                        </div>
+                        
+                        <!-- Back -->
+                        <div class="card-face card-back">
+                            <div>
+                                <span class="card-category" id="cardCategory">Catégorie</span>
+                            </div>
+                            <div class="card-situation">
+                                <h3>SITUATION</h3>
+                                <div class="card-situation-text" id="cardSituation"></div>
+                                <div class="card-questions">
+                                    <h3>💬 QUESTIONS POUR LA RÉFLEXION</h3>
+                                    <div id="cardQuestions"></div>
+                                </div>
+                            </div>
+                            <button class="flip-button" onclick="flipCard()">
+                                ↻ Retourner la carte
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="drawBtn" onclick="drawCard()">Tirer une carte</button>
+                    <button class="btn btn-outline" onclick="shuffleDeck()">🔀 Mélanger</button>
+                    <button class="btn btn-secondary" onclick="resetGame()">↻ Recommencer</button>
+                </div>
+            </div>
+
+            <!-- History -->
+            <div class="history" id="historySection" style="display: none;">
+                <h3>Cartes déjà tirées</h3>
+                <div class="history-grid" id="historyGrid"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Liste de 205 métiers
-        const JOBS_LIST = [
-            "Électricien", "Chaudronnier", "Électronicien",
-            "Médecin", "Infirmier", "Sage-femme", "Kinésithérapeute", "Pharmacien",
-            "Professeur", "Instituteur", "Éducateur", "Directeur d'école", "Conseiller pédagogique",
-            "Ingénieur civil", "Architecte", "Maçon", "Plombier", "Menuisier",
-            "Soudeur", "Mécanicien auto", "Carrossier", "Peintre en bâtiment", "Couvreur",
-            "Pompier", "Policier", "Gendarme", "Agent de sécurité", "Militaire",
-            "Avocat", "Juge", "Notaire", "Greffier", "Huissier de justice",
-            "Chef cuisinier", "Pâtissier", "Boulanger", "Serveur", "Barman",
-            "Coiffeur", "Esthéticien", "Manucure", "Maquilleur", "Tatoueur",
-            "Développeur web", "Data scientist", "Cybersécurité", "Designer UX/UI", "Chef de projet IT",
-            "Journaliste", "Photographe", "Vidéaste", "Réalisateur", "Monteur vidéo",
-            "Acteur", "Danseur", "Chanteur", "Musicien", "Chorégraphe",
-            "Agriculteur", "Éleveur", "Vétérinaire", "Maraîcher", "Viticulteur",
-            "Bûcheron", "Jardinier", "Paysagiste", "Fleuriste", "Horticulteur",
-            "Pilote d'avion", "Hôtesse de l'air", "Contrôleur aérien", "Mécanicien aéronautique",
-            "Chauffeur de bus", "Chauffeur de taxi", "Conducteur de train", "Chauffeur de camion",
-            "Marin", "Capitaine de bateau", "Pêcheur", "Plongeur professionnel",
-            "Banquier", "Comptable", "Gestionnaire de patrimoine", "Auditeur", "Trader",
-            "Directeur commercial", "Vendeur", "Agent immobilier", "Téléconseiller",
-            "Psychologue", "Psychiatre", "Psychanalyste", "Coach de vie", "Sophrologue",
-            "Assistant social", "Éducateur spécialisé", "Animateur socioculturel",
-            "Bibliothécaire", "Archiviste", "Documentaliste", "Conservateur de musée",
-            "Sportif professionnel", "Entraîneur sportif", "Arbitre", "Préparateur physique",
-            "Scientifique", "Chercheur", "Physicien", "Chimiste", "Biologiste",
-            "Astronome", "Géologue", "Océanographe", "Météorologue",
-            "Entrepreneur", "PDG", "Directeur général", "Manager", "Chef d'équipe",
-            "Graphiste", "Illustrateur", "Sculpteur", "Peintre artiste", "Céramiste",
-            "Écrivain", "Poète", "Scénariste", "Traducteur", "Correcteur",
-            "Déménageur", "Livreur", "Coursier", "Magasinier", "Logisticien",
-            "Opticien", "Audioprothésiste", "Prothésiste dentaire", "Orthodontiste",
-            "Préparateur en pharmacie", "Laborantin", "Radiologue", "Anesthésiste",
-            "Ambulancier", "Aide-soignant", "Auxiliaire de vie", "Assistant dentaire",
-            "Commissaire-priseur", "Antiquaire", "Galeriste", "Marchand d'art",
-            "Syndicaliste", "Politique", "Diplomate", "Attaché de presse",
-            "Steward", "Agent d'accueil", "Réceptionniste", "Concierge",
-            "DJ", "Producteur musical", "Ingénieur du son", "Régisseur",
-            "Styliste", "Modéliste", "Couturier", "Designer de mode",
-            "Webmaster", "Community manager", "Influenceur", "YouTubeur",
-            "Bijoutier", "Horloger", "Orfèvre", "Joaillier",
-            "Cordonnier", "Tapissier", "Ébéniste", "Relieur",
-            "Sommelier", "Œnologue", "Brasseur", "Distillateur",
-            "Maître-nageur", "Moniteur de ski", "Guide de montagne", "Moniteur d'équitation",
-            "Animalier", "Dresseur", "Toiletteur", "Éducateur canin",
-            "Thanatopracteur", "Crématorium", "Fossoyeur",
-            "Démineur", "Artificier", "Agent de douane", "Garde forestier",
-            "Sage", "Philosophe", "Théologien", "Pasteur",
-            "Youtuber gaming", "Streamer", "Pro gamer", "Game designer"
-        ];
-
-        // État du jeu
-        let gameState = {
-            players: [],
-            availableJobs: [],
-            totalCards: 205,
-            currentJob: null,
-            timeLeft: 30,
-            timerInterval: null,
-            timerRunning: false
+        // Données des cartes
+        const cardCategories = {
+            digital: "Sécurité Numérique",
+            boundaries: "Limites Personnelles",
+            peer_pressure: "Pression des Pairs",
+            respect: "Respect d'Autrui",
+            bullying: "Harcèlement",
+            self_worth: "Estime de Soi"
         };
 
+        const situationCards = [
+            {id: 1, category: "digital", situation: "Un(e) camarade te demande ton mot de passe pour 'vérifier quelque chose' sur ton compte.", questions: ["Comment te sens-tu face à cette demande ?", "Pourquoi est-ce risqué de partager ton mot de passe ?", "Que peux-tu répondre poliment mais fermement ?"]},
+            {id: 2, category: "digital", situation: "Quelqu'un partage une photo embarrassante de toi sur les réseaux sociaux sans ta permission.", questions: ["Quelle émotion ressens-tu ?", "Quel est ton droit dans cette situation ?", "Quelles actions concrètes peux-tu prendre ?"]},
+            {id: 3, category: "digital", situation: "Un inconnu t'envoie un message privé en te demandant des informations personnelles.", questions: ["Pourquoi cette situation peut-elle être dangereuse ?", "Comment protéger ta vie privée en ligne ?", "À qui peux-tu en parler si tu te sens mal à l'aise ?"]},
+            {id: 4, category: "digital", situation: "Des personnes créent un groupe de discussion pour se moquer d'un(e) élève de ta classe.", questions: ["Comment cette personne peut-elle se sentir ?", "Quel est ton rôle si tu découvres ce groupe ?", "Comment peux-tu aider sans devenir une cible ?"]},
+            {id: 5, category: "digital", situation: "Tu reçois un message qui te met mal à l'aise avec des propos déplacés.", questions: ["Dois-tu répondre à ce message ?", "Comment fixer tes limites numériques ?", "Quelle importance a ton bien-être en ligne ?"]},
+            {id: 6, category: "digital", situation: "Tes amis veulent que tu publies une vidéo embarrassante pour 'devenir viral'.", questions: ["Qu'est-ce qui est plus important : les vues ou ta dignité ?", "Quelles peuvent être les conséquences à long terme ?", "Comment rester fidèle à tes valeurs malgré la pression ?"]},
+            {id: 7, category: "digital", situation: "Quelqu'un utilise une fausse identité en ligne pour se faire passer pour toi.", questions: ["Comment cette usurpation d'identité affecte-t-elle ton image ?", "Quelles démarches peux-tu entreprendre ?", "En quoi cela touche-t-il ton estime de toi ?"]},
+            {id: 8, category: "digital", situation: "On te demande de transférer un message douteux à tous tes contacts.", questions: ["Pourquoi devrais-tu vérifier avant de partager ?", "Comment éviter de propager de fausses informations ?", "Quel est ton niveau de responsabilité numérique ?"]},
+            {id: 9, category: "digital", situation: "Tu découvres qu'un ami partage tes conversations privées avec d'autres personnes.", questions: ["Comment cette trahison affecte-t-elle ta confiance ?", "Que peux-tu faire pour protéger ta vie privée à l'avenir ?", "Comment aborder le sujet avec ton ami ?"]},
+            {id: 10, category: "digital", situation: "Des personnes commentent négativement sur toutes tes publications.", questions: ["Comment gérer ces commentaires sans affecter ton estime de toi ?", "Quand faut-il bloquer ou signaler quelqu'un ?", "Comment ne pas laisser l'opinion des autres te définir ?"]},
+            {id: 11, category: "boundaries", situation: "Un(e) ami(e) te demande constamment de lui prêter de l'argent sans jamais te rembourser.", questions: ["Comment exprimer tes limites sans culpabiliser ?", "Pourquoi est-il important de dire non parfois ?", "Comment préserver ton amitié tout en te respectant ?"]},
+            {id: 12, category: "boundaries", situation: "Quelqu'un touche tes affaires personnelles sans te demander la permission.", questions: ["Pourquoi le respect de l'espace personnel est-il important ?", "Comment communiquer ton besoin de limites ?", "Que faire si la personne ne respecte pas ta demande ?"]},
+            {id: 13, category: "boundaries", situation: "Tes amis insistent pour que tu leur racontes quelque chose de très personnel.", questions: ["As-tu l'obligation de tout partager ?", "Comment protéger ton intimité émotionnelle ?", "Pourquoi garder certaines choses privées n'est pas être distant ?"]},
+            {id: 14, category: "boundaries", situation: "Un adulte te demande de garder un secret qui te met mal à l'aise.", questions: ["Quand est-ce qu'un secret ne doit pas être gardé ?", "À qui peux-tu en parler en toute confiance ?", "Pourquoi ta sécurité est plus importante qu'une promesse ?"]},
+            {id: 15, category: "boundaries", situation: "Un(e) camarade te demande de mentir pour le/la couvrir.", questions: ["Comment ce mensonge pourrait-il t'affecter ?", "Quelle est la différence entre aider et être complice ?", "Comment rester honnête tout en étant solidaire ?"]},
+            {id: 16, category: "boundaries", situation: "Quelqu'un se moque de toi quand tu dis 'non' à une activité.", questions: ["Pourquoi as-tu le droit de refuser ?", "Comment le jugement des autres ne définit pas ta valeur ?", "Quelle force faut-il pour rester fidèle à soi-même ?"]},
+            {id: 17, category: "boundaries", situation: "On te presse de prendre une décision rapidement sans te laisser réfléchir.", questions: ["Pourquoi as-tu besoin de temps pour décider ?", "Comment la précipitation peut-elle mener à de mauvais choix ?", "Comment affirmer ton besoin de réflexion ?"]},
+            {id: 18, category: "boundaries", situation: "Un membre de ta famille lit tes messages privés sans permission.", questions: ["Comment cette intrusion affecte-t-elle ta confiance ?", "Comment exprimer ton besoin d'intimité respectueusement ?", "Où se situe la frontière entre sécurité et vie privée ?"]},
+            {id: 19, category: "boundaries", situation: "Des personnes te critiquent pour tes choix vestimentaires.", questions: ["Qui a le droit de décider comment tu t'habilles ?", "Comment rester fidèle à ton style malgré les opinions ?", "En quoi ton apparence ne définit pas qui tu es ?"]},
+            {id: 20, category: "boundaries", situation: "Quelqu'un partage tes secrets avec d'autres sans ta permission.", questions: ["Comment cette trahison affecte-t-elle ta confiance ?", "Quelles limites dois-tu fixer avec cette personne ?", "Comment reconstruire ta confiance après une trahison ?"]},
+            {id: 21, category: "peer_pressure", situation: "Tes amis te poussent à essayer quelque chose qui va contre tes valeurs.", questions: ["Comment rester fidèle à toi-même face à la pression du groupe ?", "Quelles conséquences pourraient survenir si tu cèdes ?", "Comment dire non tout en gardant tes amitiés ?"]},
+            {id: 22, category: "peer_pressure", situation: "Tout le monde se moque d'une personne et on attend que tu participes.", questions: ["Quel courage faut-il pour ne pas suivre le groupe ?", "Comment ton action (ou inaction) définit qui tu es ?", "Comment défendre quelqu'un sans devenir une cible ?"]},
+            {id: 23, category: "peer_pressure", situation: "Tes amis te disent que tu es 'trop sérieux' parce que tu veux réussir à l'école.", questions: ["Pourquoi tes objectifs sont-ils importants pour toi ?", "Comment gérer ceux qui minimisent tes ambitions ?", "En quoi être différent du groupe peut être une force ?"]},
+            {id: 24, category: "peer_pressure", situation: "On te propose de tricher lors d'un examen pour 'aider le groupe'.", questions: ["Quelles valeurs entrent en conflit dans cette situation ?", "Comment la tricherie affecte-t-elle ton intégrité ?", "Que risques-tu vraiment en trichant ?"]},
+            {id: 25, category: "peer_pressure", situation: "Tes amis veulent que tu te moques d'un enseignant avec eux.", questions: ["Pourquoi le respect est-il important même envers les adultes ?", "Comment cette moquerie te définit-elle ?", "Quelle alternative peux-tu proposer au groupe ?"]},
+            {id: 26, category: "peer_pressure", situation: "On te dit que tu dois 'prouver' ta loyauté en faisant quelque chose de risqué.", questions: ["La vraie amitié nécessite-t-elle des preuves ?", "Comment reconnaître une manipulation ?", "Quelle est la différence entre respect et soumission ?"]},
+            {id: 27, category: "peer_pressure", situation: "Tes amis excluent quelqu'un du groupe et tu dois choisir un camp.", questions: ["Comment gérer un conflit sans blesser personne ?", "Pourquoi l'exclusion est-elle une forme de violence ?", "Comment être un médiateur plutôt qu'un partisan ?"]},
+            {id: 28, category: "peer_pressure", situation: "On te demande de filmer une bagarre au lieu d'intervenir ou chercher de l'aide.", questions: ["Quelle responsabilité as-tu en tant que témoin ?", "Comment les réseaux sociaux changent-ils notre réaction aux conflits ?", "Quel courage faut-il pour faire la bonne chose ?"]},
+            {id: 29, category: "peer_pressure", situation: "Tes amis rient d'une blague raciste/sexiste et attendent ta réaction.", questions: ["Pourquoi le silence peut-il être vu comme une approbation ?", "Comment exprimer ton désaccord avec respect ?", "En quoi défendre tes valeurs renforce ton estime de toi ?"]},
+            {id: 30, category: "peer_pressure", situation: "Tout le monde achète des vêtements de marque coûteux et tu te sens exclu(e).", questions: ["Pourquoi les possessions matérielles ne définissent pas ta valeur ?", "Comment gérer le sentiment d'exclusion ?", "Quelle est la vraie base d'une amitié ?"]},
+            {id: 31, category: "respect", situation: "Tu entends des rumeurs méchantes sur quelqu'un que tu ne connais pas bien.", questions: ["Devrais-tu croire et répéter ces rumeurs ?", "Comment les rumeurs peuvent-elles détruire quelqu'un ?", "Quel rôle peux-tu jouer pour arrêter les ragots ?"]},
+            {id: 32, category: "respect", situation: "Un(e) nouvel(le) élève arrive dans ta classe et semble différent(e).", questions: ["Comment aimerais-tu être accueilli(e) si tu étais à sa place ?", "Pourquoi la différence devrait-elle être célébrée ?", "Quelle première approche peux-tu faire ?"]},
+            {id: 33, category: "respect", situation: "Quelqu'un fait une erreur embarrassante en public.", questions: ["Comment réagir avec empathie plutôt que moquerie ?", "Comment voudrais-tu être traité(e) si c'était toi ?", "En quoi la bienveillance renforce l'estime de soi des deux parties ?"]},
+            {id: 34, category: "respect", situation: "Un(e) camarade a des difficultés d'apprentissage et certains s'en moquent.", questions: ["Comment l'empathie peut-elle changer cette situation ?", "Pourquoi tout le monde apprend différemment ?", "Comment peux-tu offrir ton soutien ?"]},
+            {id: 35, category: "respect", situation: "Quelqu'un refuse de participer à une activité pour des raisons religieuses ou culturelles.", questions: ["Pourquoi le respect des croyances d'autrui est-il fondamental ?", "Comment la diversité enrichit-elle notre groupe ?", "Quelle attitude adopter face aux différences ?"]},
+            {id: 36, category: "respect", situation: "Un adulte te parle avec respect mais tu es tenté(e) de répondre avec insolence.", questions: ["Comment le respect mutuel fonctionne-t-il ?", "Pourquoi ta manière de communiquer reflète ton estime de toi ?", "Quelle impression veux-tu laisser ?"]},
+            {id: 37, category: "respect", situation: "Tu vois quelqu'un assis(e) seul(e) à la cantine tous les jours.", questions: ["Comment cette personne peut-elle se sentir ?", "Quel petit geste pourrait faire une grande différence ?", "Pourquoi l'inclusion est-elle une responsabilité collective ?"]},
+            {id: 38, category: "respect", situation: "Quelqu'un partage une opinion très différente de la tienne.", questions: ["Comment écouter vraiment sans juger ?", "Pourquoi le désaccord peut-il être enrichissant ?", "Comment débattre avec respect ?"]},
+            {id: 39, category: "respect", situation: "Une personne plus jeune que toi te demande de l'aide.", questions: ["Comment ton attitude peut inspirer cette personne ?", "Pourquoi aider les autres renforce ton estime de toi ?", "Quel modèle veux-tu être ?"]},
+            {id: 40, category: "respect", situation: "Tu remarques que quelqu'un est toujours exclu(e) des conversations.", questions: ["Quel est ton pouvoir pour changer cette situation ?", "Comment l'inclusion active fonctionne-t-elle ?", "Pourquoi chaque personne mérite d'être entendue ?"]},
+            {id: 41, category: "bullying", situation: "Tu es témoin d'un harcèlement répété envers un(e) camarade.", questions: ["Quelle est ta responsabilité en tant que témoin ?", "Comment intervenir en sécurité ?", "À qui dois-tu en parler si tu as peur ?"]},
+            {id: 42, category: "bullying", situation: "Quelqu'un te harcèle en ligne avec des messages répétés et méchants.", questions: ["Quelles preuves dois-tu conserver ?", "Comment protéger ta santé mentale ?", "Vers qui te tourner pour obtenir de l'aide ?"]},
+            {id: 43, category: "bullying", situation: "Un groupe exclut systématiquement une personne de toutes les activités.", questions: ["Pourquoi l'exclusion est une forme de harcèlement ?", "Comment peux-tu briser ce cycle ?", "Quel impact cela a-t-il sur la victime ?"]},
+            {id: 44, category: "bullying", situation: "Quelqu'un t'intimide physiquement ou te menace.", questions: ["Pourquoi tu ne dois jamais garder cela pour toi ?", "Comment ta sécurité est la priorité absolue ?", "Quels adultes de confiance peux-tu alerter immédiatement ?"]},
+            {id: 45, category: "bullying", situation: "On te dit que rapporter du harcèlement, c'est être un 'rapporteur'.", questions: ["Quelle est la différence entre dénoncer et rapporter ?", "Pourquoi protéger quelqu'un est courageux ?", "Comment les témoins peuvent-ils mettre fin au harcèlement ?"]},
+            {id: 46, category: "self_worth", situation: "Tu compares constamment ta vie à ce que tu vois sur les réseaux sociaux.", questions: ["Pourquoi les réseaux sociaux ne montrent qu'une partie de la réalité ?", "Comment cultiver ton estime de toi sans validation externe ?", "Quelles sont tes qualités uniques qui te définissent ?"]},
+            {id: 47, category: "self_worth", situation: "Tu as échoué à quelque chose d'important pour toi.", questions: ["Comment l'échec peut-il être une opportunité d'apprentissage ?", "Pourquoi ta valeur ne dépend pas de tes performances ?", "Comment te parler avec bienveillance dans ces moments ?"]},
+            {id: 48, category: "self_worth", situation: "Quelqu'un critique ton apparence physique.", questions: ["Pourquoi l'opinion des autres ne définit pas qui tu es ?", "Comment cultiver l'acceptation de ton corps ?", "Quelles qualités intérieures sont plus importantes que l'apparence ?"]},
+            {id: 49, category: "self_worth", situation: "Tu te sens invisible et penses que personne ne se soucie de toi.", questions: ["Comment demander de l'aide quand tu te sens seul(e) ?", "Quelles petites actions quotidiennes renforcent ton estime de toi ?", "À qui peux-tu parler de ces sentiments ?"]},
+            {id: 50, category: "self_worth", situation: "On te dit que tu n'es 'pas assez bien' pour quelque chose.", questions: ["Comment les mots des autres affectent-ils ton dialogue intérieur ?", "Qui a vraiment le pouvoir de déterminer ta valeur ?", "Comment transformer la critique en motivation ?"]}
+        ];
+
+        // Variables globales
+        let deck = [];
+        let drawnCards = [];
+        let currentCard = null;
+        let players = 4;
+        let isFlipped = false;
+
         // Initialisation
-        function init() {
-            renderPlayerInputs();
-        }
+        shuffleDeck();
 
-        // Afficher les inputs de joueurs
-        function renderPlayerInputs() {
-            const container = document.getElementById('playersContainer');
-            const count = gameState.players.length || 2;
-            
-            container.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const row = document.createElement('div');
-                row.className = 'player-input-row';
-                row.innerHTML = `
-                    <input type="text" placeholder="Nom du joueur ${i + 1}" id="player${i}" value="${gameState.players[i]?.name || ''}">
-                    ${count > 2 ? `<button class="btn btn-danger" onclick="removePlayer(${i})">−</button>` : ''}
-                `;
-                container.appendChild(row);
-            }
-            
-            document.getElementById('playerCount').textContent = count;
-        }
-
-        // Ajouter un joueur
-        function addPlayer() {
-            const count = document.querySelectorAll('#playersContainer input').length;
-            if (count >= 8) {
-                showToast('Maximum 8 joueurs', 'error');
-                return;
-            }
-            gameState.players.push({ name: '', score: 0 });
-            renderPlayerInputs();
-        }
-
-        // Supprimer un joueur
-        function removePlayer(index) {
-            const count = document.querySelectorAll('#playersContainer input').length;
-            if (count <= 2) {
-                showToast('Il faut au moins 2 joueurs', 'error');
-                return;
-            }
-            gameState.players.splice(index, 1);
-            renderPlayerInputs();
+        // Sélection du nombre de joueurs
+        function selectPlayers(num) {
+            players = num;
+            document.querySelectorAll('.player-buttons .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
         }
 
         // Démarrer le jeu
         function startGame() {
-            const inputs = document.querySelectorAll('#playersContainer input');
-            const players = [];
-            
-            inputs.forEach(input => {
-                if (input.value.trim()) {
-                    players.push({
-                        name: input.value.trim(),
-                        score: 0
-                    });
-                }
-            });
-
-            if (players.length < 2) {
-                showToast('Veuillez entrer au moins 2 noms de joueurs', 'error');
-                return;
-            }
-
-            // Récupérer le nombre de cartes sélectionné
-            const selectedCardsCount = parseInt(document.getElementById('cardsCount').value);
-            
-            // Mélanger et sélectionner le nombre de cartes demandé
-            const shuffledJobs = [...JOBS_LIST].sort(() => Math.random() - 0.5);
-            const selectedJobs = shuffledJobs.slice(0, selectedCardsCount);
-
-            gameState.players = players;
-            gameState.availableJobs = selectedJobs;
-            gameState.totalCards = selectedCardsCount;
-            gameState.currentJob = null;
-
-            document.getElementById('homePage').classList.add('hidden');
-            document.getElementById('gamePage').classList.remove('hidden');
-
-            updateScores();
-            updateCardsRemaining();
-            showToast(`Partie créée avec ${selectedCardsCount} cartes !`, 'success');
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            document.getElementById('playersCount').textContent = players;
+            drawCard();
         }
 
-        // Retour à l'accueil
-        function goHome() {
-            if (confirm('Voulez-vous vraiment quitter la partie en cours ?')) {
-                document.getElementById('gamePage').classList.add('hidden');
-                document.getElementById('homePage').classList.remove('hidden');
-                resetGame();
-            }
-        }
-
-        // Réinitialiser le jeu
-        function resetGame() {
-            gameState = {
-                players: [],
-                availableJobs: [],
-                totalCards: 205,
-                currentJob: null,
-                timeLeft: 30,
-                timerInterval: null,
-                timerRunning: false
-            };
-            clearInterval(gameState.timerInterval);
+        // Mélanger le paquet
+        function shuffleDeck() {
+            deck = [...situationCards].sort(() => Math.random() - 0.5);
+            drawnCards = [];
+            currentCard = null;
+            updateStats();
+            document.getElementById('historySection').style.display = 'none';
         }
 
         // Tirer une carte
         function drawCard() {
-            if (gameState.availableJobs.length === 0) {
-                showToast('Plus de cartes disponibles !', 'error');
-                return;
-            }
-
-            const randomIndex = Math.floor(Math.random() * gameState.availableJobs.length);
-            const job = gameState.availableJobs[randomIndex];
-            gameState.availableJobs.splice(randomIndex, 1);
-            gameState.currentJob = job;
-            gameState.timeLeft = 30;
-            gameState.timerRunning = false;
-
-            // Afficher la carte
-            document.getElementById('jobCardContent').innerHTML = `
-                <div class="job-card-inner">
-                    <p class="job-label fredoka">TON MÉTIER</p>
-                    <h2 class="job-name fredoka">${job}</h2>
-                </div>
-            `;
-
-            // Afficher le timer
-            document.getElementById('timerCard').classList.remove('hidden');
-            document.getElementById('startTimerBtn').classList.remove('hidden');
-            document.getElementById('showScoringBtn').classList.add('hidden');
-            document.getElementById('scoringCard').classList.add('hidden');
-            document.getElementById('nextCardBtn').classList.add('hidden');
-
-            updateTimerDisplay();
-            updateCardsRemaining();
-            showToast(`Carte tirée : ${job}`, 'success');
-        }
-
-        // Démarrer le timer
-        function startTimer() {
-            if (!gameState.currentJob) {
-                showToast("Tirez d'abord une carte !", 'error');
-                return;
-            }
-
-            gameState.timerRunning = true;
-            document.getElementById('startTimerBtn').classList.add('hidden');
-            document.getElementById('nextCardBtn').classList.add('hidden');
-
-            gameState.timerInterval = setInterval(() => {
-                gameState.timeLeft--;
-                updateTimerDisplay();
-
-                if (gameState.timeLeft <= 0) {
-                    clearInterval(gameState.timerInterval);
-                    gameState.timerRunning = false;
-                    document.getElementById('showScoringBtn').classList.remove('hidden');
-                    showToast('Temps écoulé ! Attribuez les points.', 'info');
-                }
-            }, 1000);
-        }
-
-        // Mettre à jour l'affichage du timer
-        function updateTimerDisplay() {
-            const display = document.getElementById('timerDisplay');
-            display.textContent = `${gameState.timeLeft}s`;
+            if (deck.length === 0) return;
             
-            if (gameState.timeLeft <= 10) {
-                display.classList.add('warning');
-            } else {
-                display.classList.remove('warning');
-            }
-
-            const percentage = (gameState.timeLeft / 30) * 100;
-            document.getElementById('progressFill').style.width = `${percentage}%`;
-        }
-
-        // Afficher le panneau de scoring
-        function showScoring() {
-            const container = document.getElementById('scoringContainer');
-            container.innerHTML = '';
-
-            gameState.players.forEach(player => {
-                const div = document.createElement('div');
-                div.className = 'scoring-player';
-                div.innerHTML = `
-                    <p class="scoring-player-name">${player.name}</p>
-                    <div class="scoring-buttons">
-                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 1)">+1</button>
-                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 2)">+2</button>
-                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 3)">+3</button>
-                        <button class="btn btn-points" onclick="awardPoints('${player.name}', 5)">+5</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-
-            document.getElementById('scoringCard').classList.remove('hidden');
-            document.getElementById('showScoringBtn').classList.add('hidden');
-        }
-
-        // Attribuer des points
-        function awardPoints(playerName, points) {
-            const player = gameState.players.find(p => p.name === playerName);
-            if (player) {
-                player.score += points;
-                updateScores();
-                showToast(`${points} point(s) attribué(s) à ${playerName}`, 'success');
-                
-                // Réinitialiser pour la prochaine carte
-                document.getElementById('scoringCard').classList.add('hidden');
-                document.getElementById('nextCardBtn').classList.remove('hidden');
-                gameState.currentJob = null;
-                
-                document.getElementById('jobCardContent').innerHTML = `
-                    <p class="no-card">Aucune carte tirée</p>
-                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="drawCard()">Tirer une carte</button>
-                `;
-                document.getElementById('timerCard').classList.add('hidden');
-            }
-        }
-
-        // Mettre à jour les scores
-        function updateScores() {
-            const container = document.getElementById('scoresContainer');
-            container.innerHTML = '';
-
-            gameState.players.forEach(player => {
-                const div = document.createElement('div');
-                div.className = 'player-score';
-                div.innerHTML = `
-                    <span class="player-name">${player.name}</span>
-                    <span class="player-points fredoka">${player.score}</span>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Mettre à jour le nombre de cartes restantes
-        function updateCardsRemaining() {
-            document.getElementById('cardsRemaining').textContent = gameState.availableJobs.length;
-            document.getElementById('cardsTotal').textContent = `sur ${gameState.totalCards}`;
-        }
-
-        // Afficher un toast
-        function showToast(message, type = 'info') {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
+            currentCard = deck[0];
+            deck = deck.slice(1);
+            drawnCards.push(currentCard);
+            
+            displayCard(currentCard);
+            updateStats();
+            updateHistory();
+            
+            // Retourner la carte automatiquement
+            isFlipped = false;
+            document.getElementById('card').classList.remove('flipped');
             setTimeout(() => {
-                toast.remove();
-            }, 3000);
+                flipCard();
+            }, 300);
         }
 
-        // Initialiser au chargement
-        init();
+        // Afficher une carte
+        function displayCard(card) {
+            document.getElementById('cardCategory').textContent = cardCategories[card.category];
+            document.getElementById('cardCategory').className = `card-category ${card.category}`;
+            document.getElementById('cardSituation').textContent = card.situation;
+            
+            const questionsHtml = card.questions.map((q, i) => `
+                <div class="question-item">
+                    <div class="question-number">${i + 1}</div>
+                    <div class="question-text">${q}</div>
+                </div>
+            `).join('');
+            document.getElementById('cardQuestions').innerHTML = questionsHtml;
+        }
+
+        // Retourner la carte
+        function flipCard() {
+            isFlipped = !isFlipped;
+            const card = document.getElementById('card');
+            if (isFlipped) {
+                card.classList.add('flipped');
+            } else {
+                card.classList.remove('flipped');
+            }
+        }
+
+        // Mettre à jour les statistiques
+        function updateStats() {
+            document.getElementById('cardsRemaining').textContent = deck.length;
+            document.getElementById('cardsDrawn').textContent = drawnCards.length;
+            const progress = (drawnCards.length / situationCards.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            if (deck.length === 0) {
+                document.getElementById('drawBtn').textContent = 'Paquet vide';
+                document.getElementById('drawBtn').disabled = true;
+            } else {
+                document.getElementById('drawBtn').textContent = 'Tirer une carte';
+                document.getElementById('drawBtn').disabled = false;
+            }
+        }
+
+        // Mettre à jour l'historique
+        function updateHistory() {
+            if (drawnCards.length === 0) {
+                document.getElementById('historySection').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('historySection').style.display = 'block';
+            const recentCards = drawnCards.slice(-10).reverse();
+            const historyHtml = recentCards.map(card => `
+                <div class="history-card">
+                    <span class="card-category ${card.category}">${cardCategories[card.category]}</span>
+                    <p>${card.situation}</p>
+                </div>
+            `).join('');
+            document.getElementById('historyGrid').innerHTML = historyHtml;
+        }
+
+        // Recommencer le jeu
+        function resetGame() {
+            shuffleDeck();
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
-
